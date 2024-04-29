@@ -1,1 +1,6 @@
-$test-color: red;
+@import url("./common/reset.scss");
+@import url("./common/common.scss");
+
+#app {
+  font-size: 12px;
+}
