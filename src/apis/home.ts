@@ -1,4 +1,4 @@
-import { BiqHttp } from "../utils/http";
+import { AppHttp } from "@/utils/http";
 import { BasicFetchResult } from "@/api/model/base";
 
 enum Api {
@@ -10,14 +10,15 @@ export interface ListParams {
 }
 
 export interface RowItem {
-  id: number; // 文件id
-  fileName: string; // 文件名
+  code: string;
+  name: string;
+  children?: RowItem[];
 }
 
 export type ListResult = BasicFetchResult<RowItem[]>;
 
 export const getList = (params: ListParams) => {
-  return BiqHttp.request<ListModel>({
+  return AppHttp.request<ListResult>({
     url: Api.List,
     method: "POST",
     params,
