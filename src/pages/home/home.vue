@@ -8,6 +8,7 @@
     </van-swipe>
     <!-- <van-skeleton title :row="3" /> -->
     <div>首页</div>
+    <router-link to="/"> 测试页 </router-link>
     <router-link to="/aboutus"> 跳转关于我们 </router-link>
   </div>
 </template>

@@ -1,5 +1,4 @@
 import { AppHttp } from "@/utils/http";
-import { BasicFetchResult } from "@/api/model/base";
 
 enum Api {
   Tree = "/testTree",
@@ -11,7 +10,7 @@ export interface RowItem {
   children?: RowItem[];
 }
 
-export type TreeResult = BasicFetchResult<RowItem[]>;
+export type TreeResult = RowItem[];
 
 export const getTree = () => {
   return AppHttp.request<TreeResult>({

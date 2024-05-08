@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useUserStore } from "@/store/user";
 import { showToast, showLoadingToast, closeToast } from "vant";
 import { DEFAULT_URL_PREFIX, DEFAULT_AJAX_TIMEOUT } from "@/config";
 
@@ -13,8 +14,10 @@ const AppHttp = axios.create({
 
 // 正在请求的数量
 let requestCount = 0;
+
 // 显示loading
 const showLoading = (config) => {
+  if (!config?.loading) return;
   if (requestCount === 0) {
     showLoadingToast({
       message: "加载中...",
@@ -22,15 +25,13 @@ const showLoading = (config) => {
       duration: 0,
     });
   }
-  if (config?.loading) {
-    requestCount++;
-  }
+  requestCount++;
 };
+
 // 隐藏loading
 const hideLoading = (config) => {
-  if (config?.loading) {
-    requestCount--;
-  }
+  if (!config?.loading) return;
+  requestCount--;
   if (requestCount === 0) {
     closeToast();
   }
@@ -43,8 +44,9 @@ const hideLoading = (config) => {
 AppHttp.interceptors.request.use(
   (config) => {
     // console.log("🚀 ~ config:", config);
-    const token = "222";
-    config.headers.authorization = "Bearer " + token;
+    const userStore = useUserStore();
+
+    config.headers.authorization = userStore.getToken;
     showLoading(config);
     return config;
   },

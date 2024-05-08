@@ -8,6 +8,7 @@
     />
     <van-skeleton title :row="3" />
     <van-button type="primary" @click="handleMock">请求接口</van-button>
+    <router-link to="/home">首页</router-link>
   </div>
 </template>
 
