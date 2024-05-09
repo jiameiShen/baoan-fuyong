@@ -8,6 +8,10 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+
   const userStore = useUserStore();
   to.query.accessKey && userStore.setAccessKey(to.query.accessKey);
 

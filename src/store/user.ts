@@ -21,6 +21,8 @@ export const useUserStore = defineStore("user", {
   actions: {
     setAccessKey(payload) {
       this.accessKey = payload;
+      console.log("🚀 ~ setAccessKey ~ accessKey:", payload);
+      console.log(payload);
     },
     setUserInfo(payload: LoginResult) {
       this.userInfo = payload || {};
@@ -32,7 +34,6 @@ export const useUserStore = defineStore("user", {
       }
 
       const { data: userInfo } = await login({ accessKey: this.accessKey });
-      console.log("🚀 ~ login ~ userInfo:", userInfo);
 
       if (userInfo) {
         this.setUserInfo(userInfo);
